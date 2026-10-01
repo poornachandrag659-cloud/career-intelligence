@@ -1,50 +1,181 @@
-# 🧭 AI Career Intelligence Platform
+# Career Intelligence
 
-Upload a resume and a job description → extract skills, find gaps, get a **transparent match score**,
-and receive a **personalised learning roadmap**. Built with Python, Streamlit, scikit-learn (TF-IDF + cosine
-similarity) and pypdf.
+> An AI-powered career intelligence platform designed to analyze candidate information, identify relevant skills, match users with suitable career paths, and generate personalized career roadmaps.
 
-## Quick start
-```bash
-python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-streamlit run app.py
-```
-Toggle **Use sample data** in the sidebar for an instant demo. Run tests with `pytest -q`.
+## Overview
 
-## Project layout
-```
-app.py                 Streamlit UI (tabs: score, skills, keywords, roadmap, export)
-src/parser.py          PDF / DOCX / TXT -> clean text (clear errors for scanned PDFs)
-src/skills_db.py       ~150-skill taxonomy, aliases, prerequisites, hours, learning links
-src/extractor.py       Regex skill extraction, required-vs-preferred detection, experience years
-src/matcher.py         TF-IDF cosine similarity + weighted, explainable score
-src/roadmap.py         Prerequisite-aware, phased learning plan
-src/report.py          Markdown / JSON export
-tests/test_core.py     Unit tests
-sample_data/           Demo resume (txt + pdf) and job description
-```
+Career Intelligence is a Python and Streamlit-based application that helps users understand their career opportunities by analyzing their skills, qualifications, and career-related information.
 
-## How the score works (fully transparent)
-`Overall = Σ (component score × weight)`, weights are user-adjustable and re-normalised.
+The system combines data extraction, skill matching, career analysis, and roadmap generation into a single interactive platform.
 
-| Component | Default weight | How it's computed |
-|---|---|---|
-| Required skills | 45% | Weighted coverage of JD "required" skills found in resume. Skill weight = 1 + ln(mentions in JD) |
-| Preferred skills | 10% | Same, for "nice to have" skills |
-| Text similarity | 30% | TF-IDF (1-2 grams, sublinear tf) cosine similarity, rescaled so 0.30 → 100% |
-| Experience | 15% | min(1, resume years / JD years). Resume years = union of work date ranges (education ignored) |
+The goal is to transform unstructured career information into meaningful and actionable insights.
 
-If a component can't be computed (e.g. JD states no years), it is dropped and the others re-scaled —
-missing data never silently lowers your score.
+---
 
-## Roadmap logic
-Missing skills (ranked by JD importance) → pull in missing prerequisites (e.g. PyTorch ← Deep Learning ← Machine
-Learning) → topological order → grouped into phases using your weekly study hours → curated official resources
-(or search links when none are curated).
+## Key Features
 
-## Ideas to extend
-- Swap regex extraction for spaCy `PhraseMatcher` or a sentence-embedding model (`sentence-transformers`)
-- Add OCR (`pytesseract`) for scanned PDFs
-- Add a resume-rewrite suggestions tab using an LLM API
-- Persist history with SQLite and chart score progress over time
+- 📄 **Candidate Information Analysis**
+  - Process career-related information and candidate profiles.
+  - Extract useful information from provided data.
+
+- 🧠 **Skill Extraction**
+  - Identify technical and professional skills.
+  - Organize extracted skills for further analysis.
+
+- 🎯 **Career Matching**
+  - Compare candidate skills with career requirements.
+  - Identify relevant career paths based on available skills.
+
+- 🛣️ **Career Roadmap Generation**
+  - Generate structured learning and career development roadmaps.
+  - Identify potential skill gaps and areas for improvement.
+
+- 📊 **Career Intelligence Reports**
+  - Generate structured career analysis and recommendations.
+  - Present information in an easy-to-understand format.
+
+- 🖥️ **Interactive Web Interface**
+  - Built using Streamlit.
+  - Simple browser-based interface.
+  - No complex frontend setup required.
+
+---
+
+## Problem Statement
+
+Students and early-career professionals often struggle to determine:
+
+- Which career path matches their current skills.
+- Which skills they are missing.
+- What technologies they should learn next.
+- How their current profile compares with career requirements.
+- How to create a structured career-development roadmap.
+
+Traditional career guidance can be generic and may not sufficiently consider an individual's existing skills and profile.
+
+Career Intelligence aims to provide a more structured, data-driven approach to career exploration.
+
+---
+
+## Proposed Solution
+
+The application processes candidate information and applies a structured analysis pipeline:
+
+```text
+Candidate Information
+        │
+        ▼
+Data Extraction
+        │
+        ▼
+Profile / Skill Analysis
+        │
+        ▼
+Skill Matching
+        │
+        ▼
+Career Identification
+        │
+        ▼
+Skill Gap Analysis
+        │
+        ▼
+Career Roadmap
+        │
+        ▼
+Career Intelligence Report
+System Architecture
+                    ┌──────────────────────┐
+                    │   User / Candidate   │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    Streamlit UI      │
+                    │       app.py         │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                ┌─────────────────────────────┐
+                │     Data / Information      │
+                │         Extraction          │
+                └──────────────┬──────────────┘
+                               │
+                               ▼
+                ┌─────────────────────────────┐
+                │      Profile & Skill        │
+                │          Analysis           │
+                └──────────────┬──────────────┘
+                               │
+                               ▼
+                ┌─────────────────────────────┐
+                │       Skill Matching        │
+                │          Engine             │
+                └──────────────┬──────────────┘
+                               │
+                               ▼
+                ┌─────────────────────────────┐
+                │      Career Matching        │
+                │          Engine             │
+                └──────────────┬──────────────┘
+                               │
+                               ▼
+                ┌─────────────────────────────┐
+                │       Roadmap & Report       │
+                │          Generation          │
+                └──────────────┬──────────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │  Career Intelligence │
+                    │       Results        │
+                    └──────────────────────┘
+Project Structure
+career-intelligence/
+│
+├── app.py
+│
+├── README.md
+│
+├── requirements.txt
+│
+├── sample_data/
+│   ├── sample_description...
+│   ├── sample_resume.pdf
+│   └── sample_resume.txt
+│
+└── src/
+    ├── __init__.py
+    ├── extractor.py
+    ├── matcher.py
+    ├── parser.py
+    ├── report.py
+    ├── roadmap.py
+    └── skills_db.py
+Main Components
+Component	Description
+app.py	Main Streamlit application and user interface
+src/extractor.py	Handles information extraction
+src/parser.py	Processes and parses input information
+src/matcher.py	Performs skill/career matching
+src/roadmap.py	Generates career development roadmaps
+src/report.py	Generates structured career reports
+src/skills_db.py	Contains skill-related data and matching information
+sample_data/	Contains sample inputs for testing
+Technology Stack
+Programming Language
+Python
+Application Framework
+Streamlit
+Data & Processing
+Pandas
+NumPy
+Machine Learning / AI
+Scikit-learn
+Natural Language Processing techniques
+Skill matching and classification logic
+Development Tools
+Git
+GitHub
+VS Code
+Python Virtual Environment

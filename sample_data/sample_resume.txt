@@ -1,0 +1,24 @@
+Priya Sharma
+Data Analyst | Bengaluru, India | priya.sharma@example.com
+
+SUMMARY
+Analytical data professional with experience building dashboards, SQL pipelines and
+predictive models for e-commerce teams. Strong communication and cross-functional collaboration.
+
+EXPERIENCE
+Data Analyst, ShopKart Pvt Ltd                                   Jun 2020 - Present
+- Wrote complex SQL queries on PostgreSQL and MySQL to analyse customer behaviour.
+- Built Python (pandas, NumPy, matplotlib) scripts to automate weekly reporting.
+- Trained scikit-learn models (logistic regression, random forest) for churn prediction.
+- Created Tableau and Excel dashboards used by 40+ stakeholders.
+- Ran A/B testing and hypothesis testing for pricing experiments.
+
+Junior Analyst, DataWorks                                         Jul 2018 - May 2020
+- Cleaned and transformed data with Python and SQL; supported ETL jobs.
+- Used Git and GitHub for version control; presented insights to leadership.
+
+SKILLS
+Python, SQL, pandas, NumPy, scikit-learn, Tableau, Excel, Statistics, Git, Data Visualization
+
+EDUCATION
+B.Tech in Computer Science, 2014 - 2018

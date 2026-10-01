@@ -1,5 +1,11 @@
 # Career Intelligence
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](YOUR_STREAMLIT_URL)
+
+> An AI-powered career intelligence platform...
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://career-intelligence.streamlit.app)
+# Career Intelligence
+
 > An AI-powered career intelligence platform designed to analyze candidate information, identify relevant skills, match users with suitable career paths, and generate personalized career roadmaps.
 
 ## Overview
